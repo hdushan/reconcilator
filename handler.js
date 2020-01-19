@@ -12,11 +12,15 @@ const simpleParser = require('mailparser').simpleParser;
 module.exports.processZuoraEmail = async (event) => {
   console.log('Received event:', JSON.stringify(event, null, 2));
   const record = event.Records[0];
+  console.log(record);
   // Retrieve the email from your bucket
   const request = {
     Bucket: record.s3.bucket.name,
     Key: record.s3.object.key,
   };
+
+  console.log('Bucket:', record.s3.bucket.name);
+  console.log('Key:', record.s3.object.key);
 
   try {
     const data = await s3.getObject(request).promise();
