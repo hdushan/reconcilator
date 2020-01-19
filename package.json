@@ -1,0 +1,23 @@
+{
+  "name": "reconcilator",
+  "version": "1.0.0",
+  "description": "Reconcile Zuora and EC",
+  "main": "handler.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hdushan/reconcilator.git"
+  },
+  "author": "Hans",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hdushan/reconcilator/issues"
+  },
+  "homepage": "https://github.com/hdushan/reconcilator#readme",
+  "dependencies": {
+    "aws-sdk": "^2.606.0",
+    "mailparser": "^2.7.7"
+  }
+}
