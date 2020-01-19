@@ -9,7 +9,6 @@ provider:
   runtime: nodejs12.x
   stage: preprod
   region: us-west-2
-  role: arn:aws:iam::587579738241:role/adminlambda
   iamRoleStatements:
     - Effect: Allow
       Action:

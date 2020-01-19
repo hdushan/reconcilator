@@ -10,7 +10,7 @@ const s3 = new AWS.S3({
 const simpleParser = require('mailparser').simpleParser;
 
 module.exports.processZuoraEmail = async (event) => {
-  // console.log('Received event:', JSON.stringify(event, null, 2));
+  console.log('Received event:', JSON.stringify(event, null, 2));
   const record = event.Records[0];
   // Retrieve the email from your bucket
   const request = {
