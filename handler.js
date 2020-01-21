@@ -1,6 +1,7 @@
 'use strict';
 
 const AWS = require('aws-sdk');
+var zuoraReportProcessor = require('./zuoraReportProcessor');
 
 const s3 = new AWS.S3({
   apiVersion: '2006-03-01',
@@ -30,7 +31,13 @@ module.exports.processZuoraEmail = async (event) => {
     console.log('from:', email.from.text);
     console.log('attachments:', email.attachments);
     if(email.attachments.length > 0) {
-      console.log('attachment content:', email.attachments[0].content.toString('utf16le'));
+      var csvString = email.attachments[0].content.toString('utf16le')
+      console.log('attachment content:', csvString);
+      var renewals = await zuoraReportProcessor.readCSVString(csvString)
+      renewals.forEach(element => {
+        console.log(element)
+      });
+      console.log(`Parsed ${renewals.length} rows`)
     }
     return { status: 'success' };
   } catch (Error) {
