@@ -10,9 +10,8 @@ const s3 = new AWS.S3({
 const simpleParser = require('mailparser').simpleParser;
 
 module.exports.processZuoraEmail = async (event) => {
-  console.log('Received event:', JSON.stringify(event, null, 2));
+  // console.log('Received event:', JSON.stringify(event, null, 2));
   const record = event.Records[0];
-  console.log(record);
 
   const request = {
     Bucket: record.s3.bucket.name,
@@ -30,7 +29,9 @@ module.exports.processZuoraEmail = async (event) => {
     console.log('body:', email.text);
     console.log('from:', email.from.text);
     console.log('attachments:', email.attachments);
-    console.log('attachment content:', email.attachments[0].content.toString());
+    if(email.attachments.length > 0) {
+      console.log('attachment content:', email.attachments[0].content.toString('utf16le'));
+    }
     return { status: 'success' };
   } catch (Error) {
     console.log(Error, Error.stack);
