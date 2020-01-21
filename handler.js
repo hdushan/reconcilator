@@ -13,7 +13,7 @@ module.exports.processZuoraEmail = async (event) => {
   console.log('Received event:', JSON.stringify(event, null, 2));
   const record = event.Records[0];
   console.log(record);
-  // Retrieve the email from your bucket
+
   const request = {
     Bucket: record.s3.bucket.name,
     Key: record.s3.object.key,
@@ -24,13 +24,13 @@ module.exports.processZuoraEmail = async (event) => {
 
   try {
     const data = await s3.getObject(request).promise();
-    // console.log('Raw email:' + data.Body);
     const email = await simpleParser(data.Body);
     console.log('date:', email.date);
     console.log('subject:', email.subject);
     console.log('body:', email.text);
     console.log('from:', email.from.text);
     console.log('attachments:', email.attachments);
+    console.log('attachment content:', email.attachments[0].content.toString());
     return { status: 'success' };
   } catch (Error) {
     console.log(Error, Error.stack);

@@ -17,9 +17,8 @@
   },
   "homepage": "https://github.com/hdushan/reconcilator#readme",
   "dependencies": {
+    "async-csv": "^2.1.3",
     "aws-sdk": "^2.606.0",
-    "csv-parser": "^2.3.2",
-    "mailparser": "^2.7.7",
-    "strip-bom-stream": "^4.0.0"
+    "mailparser": "^2.7.7"
   }
 }
