@@ -32,25 +32,12 @@ function summaryList(rows) {
             'msn': element['Subscription: Market Service Reference Id'],
             'name': element['Account: Name'],
             'phoneid': element['Subscription: Service Reference Id'],
-            'clientid': element['Account: Account Number'],
+            'clientid': element['Account: Account Number'].split('-')[0],
             'subscription': element['Subscription: Name'],
             'amount': element['Invoice: Amount']
         }
     })
     return summary
 }
-
-async function hans() {
-    var renewals = await readCSVFile('test.csv')
-    var summary = summaryList(renewals)
-
-    for(var key in summary) {
-        console.log(summary[key])
-    }
-      
-    console.log(`summary has ${Object.keys(summary).length} rows`)
-}
-
-// hans()
 
 module.exports = {readCSVFile, readCSVString, summaryList}
