@@ -34,10 +34,11 @@ module.exports.processZuoraEmail = async (event) => {
       var csvString = email.attachments[0].content.toString('utf16le')
       console.log('attachment content:', csvString);
       var renewals = await zuoraReportProcessor.readCSVString(csvString)
-      renewals.forEach(element => {
-        console.log(element)
-      });
-      console.log(`Parsed ${renewals.length} rows`)
+      var summary = zuoraReportProcessor.summaryList(renewals)
+      for(var key in summary) {
+        console.log(summary[key])
+      }
+      console.log(`Parsed ${renewals.length} rows, ${Object.keys(summary).length} unique msns`)
     }
     return { status: 'success' };
   } catch (Error) {
