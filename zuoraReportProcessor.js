@@ -51,6 +51,6 @@ async function hans() {
     console.log(`summary has ${Object.keys(summary).length} rows`)
 }
 
-hans()
+// hans()
 
 module.exports = {readCSVFile, readCSVString, summaryList}

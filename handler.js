@@ -29,10 +29,9 @@ module.exports.processZuoraEmail = async (event) => {
     console.log('subject:', email.subject);
     console.log('body:', email.text);
     console.log('from:', email.from.text);
-    console.log('attachments:', email.attachments);
     if(email.attachments.length > 0) {
       var csvString = email.attachments[0].content.toString('utf16le')
-      console.log('attachment content:', csvString);
+      // console.log('attachment content:', csvString);
       var renewals = await zuoraReportProcessor.readCSVString(csvString)
       var summary = zuoraReportProcessor.summaryList(renewals)
       for(var key in summary) {
