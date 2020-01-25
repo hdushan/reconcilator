@@ -7,8 +7,15 @@ custom:
 provider:
   name: aws
   runtime: nodejs12.x
+  memorySize: 256
+  timeout: 120
+  versionFunctions: false
   stage: preprod
   region: us-west-2
+  deploymentBucket:
+    name: reconcilator-deployments-${self:provider.stage}
+    blockPublicAccess: true
+  deploymentPrefix: serverless
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -17,7 +24,7 @@ provider:
 
 functions:
   reconcile:
-    handler: handler.processZuoraEmail
+    handler: src/handler.processZuoraEmail
     events:
       - s3:
           bucket: ${self:custom.bucket}
